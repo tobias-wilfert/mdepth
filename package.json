@@ -1,0 +1,25 @@
+{
+  "name": "mdepth",
+  "displayName": "mdepth",
+  "description": "A very basic syntax highlighting for both EOL and metaDepth.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.71.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "mdepth",
+      "aliases": ["mdepth", "mdepth"],
+      "extensions": [".mdepth"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "mdepth",
+      "scopeName": "source.mdepth",
+      "path": "./syntaxes/mdepth.tmLanguage.json"
+    }]
+  }
+}

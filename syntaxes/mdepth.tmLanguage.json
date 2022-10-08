@@ -1,0 +1,197 @@
+{
+  "comment": "Fix the ordering of this to allow for proper parsig:",
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "mdepth",
+  "patterns": [
+    {
+      "begin": "\"",
+      "end": "\"",
+      "name": "storage.type"
+    },
+    {
+      "begin": "'",
+      "end": "'",
+      "name": "storage.type"
+    },
+    {
+      "begin": "\\$",
+      "end": "\\$",
+      "beginCaptures": {
+        "0": {
+          "name": "entity.name.type.markup.italic"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "entity.name.type.markup.italic"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#epsilon-object-language"
+        }
+      ]
+    },
+    {
+      "comment": "Still need to fix the internals of the epsilon interpolation"
+    },
+    {
+      "begin": "//",
+      "end": "\\n",
+      "name": "comment.line"
+    },
+    {
+      "match": "\\b(\\d*|0)\\.\\d+",
+      "name": "constant.numeric.float"
+    },
+    {
+      "match": "@(\\d+)\\b",
+      "name": "entity.name.type"
+    },
+    {
+      "comment": "ranges",
+      "match": "\\b([1-9]+[0-9]*|0)\\.\\.([1-9]+[0-9]*|0)\\b",
+      "name": "constant.numeric.integer"
+    },
+    {
+      "match": "\\b([1-9]+[0-9]*|0)",
+      "name": "constant.numeric.integer"
+    },
+    {
+      "match": "\\b(\\d{,2}/\\d{,2}/\\d{,2})",
+      "name": "constant.numeric.integer"
+    },
+    {
+      "comment": "keywords for structure",
+      "name": "keyword.control",
+      "match": "\\b(Model|Node|Edge)\\b"
+    },
+    {
+      "comment": "modifier keywords",
+      "name": "storage.modifier",
+      "match": "\\b(abstract|enum|ext|imports)\\b"
+    },
+    {
+      "comment": "modifier keywords 2",
+      "name": "entity.name.type",
+      "match": "\\b(ordered|id|unique)\\b"
+    },
+    {
+      "comment": "symbols",
+      "name": "keyword.control.statement",
+      "match": "[.,;:+\\-*/<>=?!]"
+    },
+    {
+      "comment": "types",
+      "name": "storage.type",
+      "match": "\\b(int|String|boolean|Date|double)\\b"
+    },
+    {
+      "name": "variable.language.self",
+      "match": "\\b(null|true|false)\\b"
+    },
+    {
+      "match": "([A-Z_][a-zA-Z0-9_]*)\\s+[a-zA-Z_][a-zA-Z0-9_]*?(\\s+(imports)\\s+[a-zA-Z_][a-zA-Z0-9_]*)?\\s*[{;]",
+      "captures": {
+        "1": {
+          "name": "storage.type"
+        },
+        "3": {
+          "name": "storage.modifier"
+        }
+      }
+    }
+  ],
+  "repository": {
+    "epsilon-object-language":{
+      "patterns": [
+        {
+          "begin": "\"",
+          "end": "\"",
+          "name": "storage.type.string"
+        },
+        {
+          "begin": "'",
+          "end": "'",
+          "name": "storage.type.string"
+        },
+        {
+          "name": "entity.name.type",
+          "begin": "`",
+          "end": "`"
+        },
+        {
+          "begin": "//",
+          "end": "\\n",
+          "name": "comment.line"
+        },
+        {
+          "match": "(@|\\$)([a-z]+)\\b",
+          "name": "entity.name.type"
+        },
+        {
+          "match": "\\b(\\d*|0)\\.\\d+",
+          "name": "constant.numeric.float"
+        },
+        {
+          "comment": "ranges",
+          "match": "\\b([1-9]+[0-9]*|0)\\.\\.([1-9]+[0-9]*|0)\\b",
+          "name": "constant.numeric.integer"
+        },
+        {
+          "match": "\\b([1-9]+[0-9]*|0)",
+          "name": "constant.numeric.integer"
+        },
+        {
+          "comment": "keywords for exceptions",
+          "name": "keyword.control.exception",
+          "match": "\\b(throw)\\b"
+        },
+        {
+          "comment": "keywords for conditionals",
+          "name": "keyword.control.conditional",
+          "match": "\\b(if|else|switch|case|default)\\b"
+        },
+        {
+          "comment": "keywords for loops",
+          "name": "keyword.control.repeat",
+          "match": "\\b(while|for)\\b"
+        },
+        {
+          "comment": "keywords that alter flow within loops",
+          "name": "keyword.control.statement",
+          "match": "\\b(continue|break|breakAll|return|abort|assert)\\b"
+        },
+        {
+          "comment": "operator keywords",
+          "name": "keyword.control.statement",
+          "match": "\\b(and|or|not|implies|xor|in)\\b"
+        },
+        {
+          "comment": "other keywords",
+          "name": "keyword.control.statement",
+          "match": "\\b(var|transaction|new|delete|operation|to|rule|transform|import)\\b"
+        },
+        {
+          "comment": "symbols",
+          "name": "keyword.control.statement",
+          "match": "[.,;:+\\-*/<>=?!#]"
+        },
+        {
+          "comment": "types",
+          "name": "support.storage.type",
+          "match": "\\b(Any|Integer|String|Boolean|Real|Map|Collection|Bag|Set|OrderedSet|Sequence|Native|PrimitiveType|ModelElementType|Float|Tuple|Native)\\b"
+        },
+        {
+          "name": "variable.language.self",
+          "match": "\\b(self|null|true|false)\\b"
+        },
+        {
+          "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\(.*?\\))",
+          "name": "entity.name.function"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.mdepth"
+}
